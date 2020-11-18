@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 const Home = ({ userObj }) => {
   const [nweet, setNweet] = useState('');
   const [nweets, setNweets] = useState([]);
-  const [attachment, setAttachment] = useState();
+  const [attachment, setAttachment] = useState('');
   useEffect(() => {
     dbService.collection('nweets').onSnapshot((snapshot) => {
       const nweetArray = snapshot.docs.map((doc) => ({
@@ -47,6 +47,7 @@ const Home = ({ userObj }) => {
     const {
       target: { files },
     } = event;
+    if (files.length === 0) return;
     const theFile = files[0];
     const reader = new FileReader();
     reader.onloadend = (finishedEvent) => {
